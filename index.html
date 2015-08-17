@@ -23,7 +23,7 @@
                     </tr>
                     <tr ng-repeat="product in products">
                         <td>{{product.name}}</td>
-                        <td>{{product.price}}</td>
+                        <td>{{product.price | currency:"$"}}</td>
                         <td>
                             <button class="btn btn-primary" ng-click="addToCart(product)">
                                 <span class="glyphicon glyphicon-shopping-cart">Add to Cart</span>
@@ -56,7 +56,7 @@
                             </button>
                         </td>
                         <td>{{productInCart.name}}</td>
-                        <td>{{productInCart.price}}</td>
+                        <td>{{productInCart.price | currency:"$"}}</td>
                         <td>
                             <input size="2"
                                    type="number"
@@ -64,20 +64,20 @@
                                    ng-model="productInCart.quantity"
                                    value="{{productInCart.quantity}}">
                         </td>
-                        <td>{{productInCart.price * productInCart.quantity}}</td>
+                        <td>{{(productInCart.price * productInCart.quantity) | currency:"$"}}</td>
                     </tr>
                     <tr>
                         <td colspan="5">
-                            Cart Value : {{totalAmount()}}
+                            Cart Value : {{totalAmount() | currency:"$"}}
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5"><button class="btn" ng-click="checkOut">Check Out</button></td>
+                        <td colspan="5"><button class="btn btn-success" ng-click="checkOut()">Check Out</button></td>
                     </tr>
                 </table>
-
-                <h1>{{byeMessage}}</h1>
             </div>
         </div>
+        <h1 ng-show="byeMessage">Sit back and relax..your stuff just shipped off from Mars..</h1>
+        <h1 ng-show="poorMessage">Oh poor boy.. not dollars to buy stuff?</h1>
     </body>
 </html>

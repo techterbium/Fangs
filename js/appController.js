@@ -15,23 +15,23 @@ c.controller("ProductController",function($scope, $rootScope) {
     console.info("ProductController Function");
     $scope.products = [{
                    "code":"PRD001",
-                   "name":"Samsung MicroOven",
-                   "price":"18000",
+                   "name":"Samsung Kindle",
+                   "price":"1000",
                    "description":"28L Convection"
                   },{
                    "code":"PRD002",
-                   "name":"Panasonic MicroOven",
-                   "price":"19000",
+                   "name":"Panasonic Generator",
+                   "price":"1900",
                    "description":"27L Convection"
                   },{
                    "code":"PRD003",
-                   "name":"IFB MicroOven",
-                   "price":"20000",
+                   "name":"IFB Android Phone",
+                   "price":"2800",
                    "description":"29L Convection"
                   },{
                    "code":"PRD004",
-                   "name":"LG MicroOven",
-                   "price":"21000",
+                   "name":"LG Stoves",
+                   "price":"2100",
                    "description":"21L Convection"
                   }]
 
@@ -74,8 +74,17 @@ c.controller("CartController", function($scope, $rootScope){
         return totalCartValue;
     };
 
-    $scope.checkOut = function()
-    {
-        $rootScope.byeMessage = "Sit Back & Relaax.. ";
+    $scope.checkOut = function(){
+        
+        if($rootScope.productsInCart.length == 0)
+        {
+            $rootScope.poorMessage = true;
+            $rootScope.byeMessage = false;
+        }
+        else
+        {
+            $rootScope.byeMessage = true;
+            $rootScope.poorMessage = false;
+        }
     };
 });
