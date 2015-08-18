@@ -2,8 +2,19 @@ var c = angular.module("appControlModule", ['appServiceModule'], function () {
 console.info("CtrlModule function");
 });
 
-c.controller("MainController", function ($scope) {
+c.controller("MainController", function ($scope, $location, $rootScope) {
+        $scope.$on("$locationChangeSuccess", function () {
+            console.log("Location Change Success --> " + $location.path());
 
+            if($location.path() == "/logout")
+            {
+                $rootScope.isLoggedIn = false;
+                $location.path("/login");
+            } else if($location.path() == "/productMgmt" && !$rootScope.isLoggedIn)
+            {
+                $location.path("/login")
+            }
+    });
 });
 
 c.config(function() {
@@ -19,14 +30,14 @@ c.controller("ProductController",function($scope, appService, cartService) {
     console.info("ProductController Function");
 
     $scope.products = appService.getAllProducts();
+    $scope.cartSize = cartService.allCartItems().length;
 
     $scope.addToCart = function(product){
 
         console.log("addTOCart");
         var continueFurther = true;
-        console.log(product.name);
+        console.log("Searching for " + product.name);
         angular.forEach(cartService.allCartItems(), function(cartItem){
-            console.log(cartItem.name);
             if(cartItem.name == product.name)
             {
                 console.log("Item Found..");
@@ -82,4 +93,19 @@ c.controller("CartController", function($scope, cartService){
 
 c.controller("DetailsController", function ($scope, $routeParams) {
     $scope.details = angular.fromJson($routeParams.product);
+
+});
+
+
+c.controller("LoginController", function ($scope, $location, $rootScope) {
+
+    $scope.Login = function () {
+      if($scope.login.uname == "admin") {
+          $rootScope.isLoggedIn = true;
+          $location.path("/productMgmt");
+      } else {
+            $location.path("/login");
+    }
+    };
+
 });

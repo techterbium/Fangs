@@ -8,7 +8,6 @@ appServiceModule.service("appService", function (productFactory) {
 
 appServiceModule.service("cartService", function (cartFactory) {
     this.addProductToCart = function (product) {
-
         var continueFurther = true;
         angular.forEach(this.allCartItems, function (cartItem) {
             if(cartItem.name == product.name)
@@ -22,11 +21,9 @@ appServiceModule.service("cartService", function (cartFactory) {
             cartFactory.addToCart(product);
         }
     };
-
     this.removeFromCart = function (index) {
         cartFactory.removeFromCart(index);
     };
-
     this.allCartItems = function () {
         return cartFactory.allCartItems();
     };

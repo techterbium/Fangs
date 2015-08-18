@@ -1,1 +1,4 @@
-var MainController = angular.module("MainController", []);
+var MainController = angular.module("MainController", [], function () {
+
+
+});

@@ -12,10 +12,16 @@ console.info("myCartApp Config");
 
     $routeProvider.when("/details/:product", {templateUrl:"views/partials/productDetails.html", controller : 'DetailsController'});
 
+
+    $routeProvider.when("/login", {templateUrl : "views/partials/login.html", controller : 'LoginController'});
+    $routeProvider.when("/logout", {templateUrl : "views/partials/logout.html"});
+    $routeProvider.when("/error", {templateUrl : "views/partials/error.html"});
+
+
     $routeProvider.otherwise({template: "<h3>Error 404</h3>"})
 
 });
 
-app.run(function(){
-   console.info("myCartApp Run");
+app.run(function($rootScope){
+   $rootScope.isLoggedIn = false;
 });
