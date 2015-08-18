@@ -1,0 +1,19 @@
+<h3>Products Management</h3>
+
+<table class="table table-bordered table-striped">
+
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+    </tr>
+
+    <tr ng-repeat="product in products">
+        <td>{{product.code}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.description}}</td>
+    </tr>
+
+</table>

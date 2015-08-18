@@ -1,0 +1,27 @@
+<div class="col-sm-5 well" ng-controller="ProductController">
+    <h3>Product Catalog</h3>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat="product in products">
+            <td>
+                <a href="#/details/{{product}}">
+                {{product.name}}</a></td>
+            <td>{{product.price | currency:"$"}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="addToCart(product)">
+                    <span class="glyphicon glyphicon-shopping-cart">Add to Cart</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <button class="btn btn-primary">
+        <span class="glyphicon glyphicon-shopping-cart">Cart {{}}</span>
+    </button>
+</div>
