@@ -1,4 +1,5 @@
-<div class="col-sm-5 well" ng-controller="CartController">
+<div ng-controller="CartController">
+<div class="col-sm-8 well" >
     <h3>Your Cart
         <small>Size:
             <span class="label label-primary">
@@ -26,6 +27,7 @@
             <td>
                 <input size="2"
                        type="number"
+                       min="1"
                        style="width:50px"
                        ng-model="productInCart.quantity"
                        value="{{productInCart.quantity}}">
@@ -39,7 +41,12 @@
         </tr>
         <tr>
             <td colspan="5">
-                <button class="btn btn-success" ng-click="checkOut()">Check Out</button>             </td>
+                <button class="btn btn-success" ng-click="checkOut()">Place Order</button>
+            </td>
         </tr>
     </table>
+</div>
+<div>
+        <h1>{{poorMessage}}</h1>
+</div>
 </div>

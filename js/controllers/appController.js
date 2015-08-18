@@ -5,7 +5,6 @@ console.info("CtrlModule function");
 c.controller("MainController", function ($scope, $location, $rootScope) {
         $scope.$on("$locationChangeSuccess", function () {
             console.log("Location Change Success --> " + $location.path());
-
             if($location.path() == "/logout")
             {
                 $rootScope.isLoggedIn = false;
@@ -17,20 +16,10 @@ c.controller("MainController", function ($scope, $location, $rootScope) {
     });
 });
 
-c.config(function() {
-console.info("CtrlModule Config");
-});
-
-c.run(function() {
-console.info("CtrlModule Run");
-});
-
-
 c.controller("ProductController",function($scope, appService, cartService) {
     console.info("ProductController Function");
 
     $scope.products = appService.getAllProducts();
-    $scope.cartSize = cartService.allCartItems().length;
 
     $scope.addToCart = function(product){
 
@@ -55,8 +44,9 @@ c.controller("ProductController",function($scope, appService, cartService) {
                         "quantity":1}
             cartService.addProductToCart(product);
          }
+        $scope.cartSize = cartService.allCartItems().length;
+        console.log($scope.cartSize);
     };
-
 });
 
 c.controller("CartController", function($scope, cartService){
@@ -77,16 +67,13 @@ c.controller("CartController", function($scope, cartService){
     };
 
     $scope.checkOut = function($rootScope){
-
-        if(cartService.allCartItems().length == 0)
+        if(($scope.productsInCart.length == 0))
         {
-            $rootScope.poorMessage = true;
-            $rootScope.byeMessage = false;
+            $scope.poorMessage = "Oh poor boy.. no dollars to buy stuff?";
         }
         else
         {
-            $rootScope.byeMessage = true;
-            $rootScope.poorMessage = false;
+            $scope.poorMessage = "Sit back and relax..your stuff just shipped off from Mars..";
         }
     };
 });
@@ -95,7 +82,6 @@ c.controller("DetailsController", function ($scope, $routeParams) {
     $scope.details = angular.fromJson($routeParams.product);
 
 });
-
 
 c.controller("LoginController", function ($scope, $location, $rootScope) {
 
@@ -107,5 +93,4 @@ c.controller("LoginController", function ($scope, $location, $rootScope) {
             $location.path("/login");
     }
     };
-
 });

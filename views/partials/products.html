@@ -1,29 +1,30 @@
-<div class="col-sm-5 well" ng-controller="ProductController">
+<div ng-controller="ProductController">
+    <div class="col-sm-5 well">
     <h3>Product Catalog</h3>
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-        <tr ng-repeat="product in products">
-            <td>
-                <a href="#/details/{{product}}">
-                {{product.name}}</a></td>
-            <td>{{product.price | currency:"$"}}</td>
-            <td>
-                <button class="btn btn-primary" ng-click="addToCart(product)">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                    Add to Cart
-                </button>
-            </td>
-        </tr>
-    </table>
-</div>
-
-<div>
-    <button class="btn btn-primary">
-        <span class="glyphicon glyphicon-shopping-cart"></span>
-        Cart ({{}})
-    </button>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="product in products">
+                <td>
+                    <a href="#/details/{{product}}">
+                    {{product.name}}</a></td>
+                <td>{{product.price | currency:"$"}}</td>
+                <td>
+                    <button class="btn btn-primary" ng-click="addToCart(product)">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        Add to Cart
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-5-offset">
+        <a class="btn btn-primary" href="#/cart">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            Checkout ( {{cartSize}} )
+        </a>
+    </div>
 </div>
