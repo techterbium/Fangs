@@ -4,6 +4,14 @@ appServiceModule.service("appService", function (productFactory) {
     this.getAllProducts = function () {
         return productFactory.getProducts();
     };
+
+    this.addNewProduct = function (newProduct) {
+      productFactory.addNewProduct(newProduct);
+    };
+
+    this.deleteProduct = function (id, index) {
+      productFactory.deleteProduct(id, index);
+    };
 });
 
 appServiceModule.service("cartService", function (cartFactory) {

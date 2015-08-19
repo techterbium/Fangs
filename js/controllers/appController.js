@@ -9,7 +9,7 @@ c.controller("MainController", function ($scope, $location, $rootScope) {
             {
                 $rootScope.isLoggedIn = false;
                 $location.path("/login");
-            } else if($location.path() == "/productMgmt" && !$rootScope.isLoggedIn)
+            } else if($location.path() == "/productMgmt1" && !$rootScope.isLoggedIn)
             {
                 $location.path("/login")
             }
@@ -46,6 +46,16 @@ c.controller("ProductController",function($scope, appService, cartService) {
          }
         $scope.cartSize = cartService.allCartItems().length;
         console.log($scope.cartSize);
+    };
+
+    $scope.saveProduct = function (newProduct) {
+        appService.addNewProduct($scope.newProduct);
+        $scope.newProduct = {};
+    };
+
+    $scope.deleteProduct = function (id, index) {
+        appService.deleteProduct(id,index);
+//        $scope.products = appService.getAllProducts();
     };
 });
 

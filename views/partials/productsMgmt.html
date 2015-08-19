@@ -3,6 +3,7 @@
 <table class="table table-bordered table-striped">
 
     <tr>
+        <th></th>
         <th>Code</th>
         <th>Name</th>
         <th>Price</th>
@@ -10,10 +11,27 @@
     </tr>
 
     <tr ng-repeat="product in products">
+        <td><button class="btn btn-danger" ng-click="deleteProduct(product.id, $index)">
+            <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </td>
         <td>{{product.code}}</td>
         <td>{{product.name}}</td>
         <td>{{product.price}}</td>
         <td>{{product.description}}</td>
     </tr>
+
+    <div class="well">
+        <h4>Add new Product</h4>
+        <form>
+            <input ng-model="newProduct.code" placeholder="Code.." size="5" />
+            <input ng-model="newProduct.name" placeholder="Name.." />
+            <input ng-model="newProduct.price" placeholder="price.."  type="number"  min="0" max="9999"/>
+            <input ng-model="newProduct.description" placeholder="Long description.." />
+            <button class="btn btn-primary" ng-click="saveProduct(newProduct)">
+                <span class="glyphicon glyphicon-floppy-save"></span> Save
+            </button>
+        </form>
+    </div>
 
 </table>

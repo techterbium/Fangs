@@ -1,34 +1,28 @@
-var appFactoryModule = angular.module("appFactoryModule", []);
+var appFactoryModule = angular.module("appFactoryModule", ['ngResource']);
 
-appFactoryModule.factory("productFactory", function () {
+appFactoryModule.factory("productFactory", function ($resource) {
 
+    var productsResource = $resource("http://localhost:2403/products", {"id" : "@id"});
+    var products;
 
-    var products = [{
-                   "code":"PRD001",
-                   "name":"Samsung Kindle",
-                   "price":"1000",
-                   "description":"28L Convection"
-                  },{
-                   "code":"PRD002",
-                   "name":"Panasonic Generator",
-                   "price":"1900",
-                   "description":"27L Convection"
-                  },{
-                   "code":"PRD003",
-                   "name":"IFB Android Phone",
-                   "price":"2800",
-                   "description":"29L Convection"
-                  },{
-                   "code":"PRD004",
-                   "name":"LG Stoves",
-                   "price":"2100",
-                   "description":"21L Convection"
-                  }];
-        return {
-            getProducts : function () {
-                return products;
-            }
+    return {
+        getProducts : function () {
+            products = productsResource.query();
+            return products;
+        },
+        addNewProduct : function (newProduct) {
+            var p = new productsResource(newProduct);
+            p.$save(function (responseData) {
+                products.push(responseData);
+            });
+        },
+        deleteProduct : function (pid, index) {
+            var p = new productsResource({"id": pid});
+            p.$remove(function () {
+                products.splice(index, 1);
+            });
         }
+    }
 });
 
 appFactoryModule.factory("cartFactory", function () {
