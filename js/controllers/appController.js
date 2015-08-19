@@ -124,3 +124,29 @@ c.controller("LoginController", function ($scope, $location, $rootScope) {
     }
     };
 });
+
+c.controller("SignUpController", function ($scope) {
+
+    $scope.statesList = [{"stateID":1, "stateName" : "Maharastra"},
+                        {"stateID":2, "stateName" : "Jharkand"},
+                        {"stateID":3, "stateName" : "Bihar"}];
+
+
+    $scope.$watch("newUser.state", function (newValue, oldValue) {
+        console.log(newValue);
+
+        if(newValue == 1)
+        {
+            $scope.citiesList = [{"cityID" : 1, "cityName" : "Mumbai"}]
+        }
+        else if(newValue == 2)
+        {
+            $scope.citiesList = [{"cityID" : 1, "cityName" : "Ranchi"}]
+        }
+        else
+        {
+            $scope.citiesList = [{"cityID" : 1, "cityName" : "Patna"}]
+        }
+    });
+
+});

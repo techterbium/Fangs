@@ -17,9 +17,9 @@ console.info("myCartApp Config");
     $routeProvider.when("/logout", {templateUrl : "views/partials/logout.html"});
     $routeProvider.when("/error", {templateUrl : "views/partials/error.html"});
 
+    $routeProvider.when("/signUp", {templateUrl : "views/partials/signup.html", controller: 'SignUpController'});
 
     $routeProvider.otherwise({template: "<h3>Error 404</h3>"})
-
 });
 
 app.run(function($rootScope){

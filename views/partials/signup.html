@@ -1,0 +1,110 @@
+<h2> New User Registration</h2>
+
+<form name="newUserForm" >
+    <table class="table">
+        <tr>
+            <td>First Name : </td>
+            <td>
+                <input type="text"
+                       name="firstName"
+                       ng-model="newUser.firstname"
+                       placeholder="Enter First Name.."
+                       ng-required="true"/>
+            </td>
+            <td>
+                <span ng-show="newUserForm.firstName.$error.required && newUserForm.firstName.$dirty"> First Name is required.</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Mobile #: </td>
+            <td>
+                <input type="number"
+                       name="mobileNumber"
+                       ng-model="newUser.mobileNumber"
+                       ng-pattern="/^[789]\d{9}$/"
+                       placeholder="Enter Mobile Number.."/>
+            </td>
+            <td>
+                <span ng-show="newUserForm.mobileNumber.$dirty && newUserForm.mobileNumber.$error.pattern">Invalid Mobile Number!</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Email : </td>
+            <td>
+                <input type="email"
+                       ng-model="newUser.email"
+                       required="true"
+                       placeholder="Enter your email.."/>
+            </td>
+        </tr>
+        <tr>
+            <td>Username : </td>
+            <td>
+                <input
+                       type="text"
+                       ng-model="newUser.username"
+                       required="true"
+                       placeholder="Enter your User Name.."/>
+            </td>
+        </tr>
+        <tr>
+            <td>Password : </td>
+            <td><input
+                       type="password"
+                       name="password"
+                       ng-model="newUser.password"
+                       required
+                       ng-minlength="8"
+                       ng-maxlength="10"
+                       placeholder="Enter your password.."/>
+            </td>
+            <td>
+                <span ng-show="newUserForm.password.$dirty && newUserForm.password.$error.required">
+                    Password required!!
+                </span>
+                <span ng-show="newUserForm.password.$dirty && newUserForm.password.$error.minlength">
+                    Too Short!!
+                </span>
+                <span ng-show="newUserForm.password.$dirty && newUserForm.password.$error.maxlength">
+                    Too Long!!
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td> Gender: </td>
+            <td>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button type="button" class="btn btn-default">Male</button>
+                  <button type="button" class="btn btn-default">Female</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td> State: </td>
+            <td>
+                <select name="userState"
+                        ng-model="newUser.state"
+                        ng-options="state.stateID as state.stateName for state in statesList">
+                    <option value="">Select..</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td> City: </td>
+            <td>
+                <select name="userCity"
+                        ng-model="newUser.city"
+                        ng-options="city.cityID as city.cityName for city in citiesList">
+                    <option value="">Select..</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit"
+                       class="btn btn-primary" value="Register Me!"
+                       ng-disabled="newUserForm.$invalid" />
+            </td>
+        </tr>
+    </table>
+</form>
