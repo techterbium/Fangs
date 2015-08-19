@@ -25,3 +25,10 @@ console.info("myCartApp Config");
 app.run(function($rootScope){
    $rootScope.isLoggedIn = false;
 });
+
+app.filter("truncate", function () {
+    return function (input, limit) {
+        return (input.length > limit) ?
+            input.substring(0,limit) + "..." : input;
+    };
+});

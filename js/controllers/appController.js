@@ -22,6 +22,7 @@ c.controller("ProductController",function($scope, appService, cartService) {
     $scope.products = appService.getAllProducts();
     $scope.newProduct = {};
     $scope.buttonName = "Add";
+    $scope.toDisplay = 1;
     $scope.addToCart = function(product){
 
         console.log("addTOCart");
@@ -71,6 +72,10 @@ c.controller("ProductController",function($scope, appService, cartService) {
         $scope.newProduct.index = index;
         $scope.buttonName = "Save";
     };
+
+    $scope.loadMore = function () {
+        $scope.toDisplay++;
+    }
 
 });
 

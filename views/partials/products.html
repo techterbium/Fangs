@@ -10,7 +10,7 @@
             <tr ng-repeat="product in products">
                 <td>
                     <a href="#/details/{{product}}">
-                    {{product.name}}</a></td>
+                    {{product.name | uppercase}}</a></td>
                 <td>{{product.price | currency:"$"}}</td>
                 <td>
                     <button class="btn btn-primary" ng-click="addToCart(product)">

@@ -1,16 +1,31 @@
 <h3>Products Management</h3>
 
-<table class="table table-bordered table-striped">
+<div class="well">
+    <h4>A product..</h4>
+    <form>
+        <input ng-model="newProduct.code" placeholder="Code.." size="5" />
+        <input ng-model="newProduct.name" placeholder="Name.." />
+        <input ng-model="newProduct.price" placeholder="price.."  type="number"  min="0" max="9999"/>
+        <input ng-model="newProduct.description" placeholder="Long description.." />
+        <button class="btn btn-primary" ng-click="saveProduct(newProduct)">
+            <span class="glyphicon glyphicon-floppy-save"></span> {{buttonName}}
+        </button>
+        <button class="btn btn-primary" ng-click="newProduct = {}">
+            <span class="glyphicon glyphicon-floppy-clear"></span> Clear
+        </button>
+    </form>
+</div>
 
+<table class="table table-bordered table-striped">
     <tr>
-        <th></th>
-        <th>Code</th>
-        <th>Name</th>
+        <th><button class="btn" ng-click="loadMore()">Load More</button></th>
+        <th>Code<input ng-model="search.code" placeholder="search.." size="4" /></th>
+        <th>Name<input ng-model="search.name" placeholder="search.." size="4"/></th>
         <th>Price</th>
         <th>Description</th>
     </tr>
 
-    <tr ng-repeat="product in products">
+    <tr ng-repeat="product in products | limitTo:toDisplay | filter:search">
         <td>
             <button class="btn btn-danger" ng-click="deleteProduct(product.id, $index)">
                 <span class="glyphicon glyphicon-trash"></span>
@@ -20,25 +35,8 @@
             </button>
         </td>
         <td>{{product.code}}</td>
-        <td>{{product.name}}</td>
+        <td>{{product.name | uppercase}}</td>
         <td>{{product.price | currency:$}}</td>
-        <td>{{product.description}}</td>
+        <td>{{product.description | truncate:15 | lowercase}}</td>
     </tr>
-
-    <div class="well">
-        <h4>A product..</h4>
-        <form>
-            <input ng-model="newProduct.code" placeholder="Code.." size="5" />
-            <input ng-model="newProduct.name" placeholder="Name.." />
-            <input ng-model="newProduct.price" placeholder="price.."  type="number"  min="0" max="9999"/>
-            <input ng-model="newProduct.description" placeholder="Long description.." />
-            <button class="btn btn-primary" ng-click="saveProduct(newProduct)">
-                <span class="glyphicon glyphicon-floppy-save"></span> {{buttonName}}
-            </button>
-            <button class="btn btn-primary" ng-click="newProduct = {}">
-                <span class="glyphicon glyphicon-floppy-clear"></span> Clear
-            </button>
-        </form>
-    </div>
-
 </table>
