@@ -20,7 +20,8 @@ c.controller("ProductController",function($scope, appService, cartService) {
     console.info("ProductController Function");
 
     $scope.products = appService.getAllProducts();
-
+    $scope.newProduct = {};
+    $scope.buttonName = "Add";
     $scope.addToCart = function(product){
 
         console.log("addTOCart");
@@ -49,14 +50,28 @@ c.controller("ProductController",function($scope, appService, cartService) {
     };
 
     $scope.saveProduct = function (newProduct) {
-        appService.addNewProduct($scope.newProduct);
+        if($scope.newProduct.id == undefined)
+        {
+            appService.addNewProduct($scope.newProduct);
+        }
+        else
+        {
+            appService.updateProduct($scope.newProduct);
+        }
+        $scope.buttonName = "Add";
         $scope.newProduct = {};
     };
 
     $scope.deleteProduct = function (id, index) {
         appService.deleteProduct(id,index);
-//        $scope.products = appService.getAllProducts();
     };
+
+    $scope.editProduct = function (product , index) {
+        $scope.newProduct = angular.copy(product);
+        $scope.newProduct.index = index;
+        $scope.buttonName = "Save";
+    };
+
 });
 
 c.controller("CartController", function($scope, cartService){

@@ -11,25 +11,32 @@
     </tr>
 
     <tr ng-repeat="product in products">
-        <td><button class="btn btn-danger" ng-click="deleteProduct(product.id, $index)">
-            <span class="glyphicon glyphicon-trash"></span>
+        <td>
+            <button class="btn btn-danger" ng-click="deleteProduct(product.id, $index)">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+            <button class="btn btn-primary" ng-click="editProduct(product, $index)">
+                <span class="glyphicon glyphicon-edit"></span>
             </button>
         </td>
         <td>{{product.code}}</td>
         <td>{{product.name}}</td>
-        <td>{{product.price}}</td>
+        <td>{{product.price | currency:$}}</td>
         <td>{{product.description}}</td>
     </tr>
 
     <div class="well">
-        <h4>Add new Product</h4>
+        <h4>A product..</h4>
         <form>
             <input ng-model="newProduct.code" placeholder="Code.." size="5" />
             <input ng-model="newProduct.name" placeholder="Name.." />
             <input ng-model="newProduct.price" placeholder="price.."  type="number"  min="0" max="9999"/>
             <input ng-model="newProduct.description" placeholder="Long description.." />
             <button class="btn btn-primary" ng-click="saveProduct(newProduct)">
-                <span class="glyphicon glyphicon-floppy-save"></span> Save
+                <span class="glyphicon glyphicon-floppy-save"></span> {{buttonName}}
+            </button>
+            <button class="btn btn-primary" ng-click="newProduct = {}">
+                <span class="glyphicon glyphicon-floppy-clear"></span> Clear
             </button>
         </form>
     </div>

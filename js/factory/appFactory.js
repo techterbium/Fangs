@@ -2,7 +2,7 @@ var appFactoryModule = angular.module("appFactoryModule", ['ngResource']);
 
 appFactoryModule.factory("productFactory", function ($resource) {
 
-    var productsResource = $resource("http://localhost:2403/products", {"id" : "@id"});
+    var productsResource = $resource("http://localhost:2403/products", {"id" : "@id"}, {update: {method : 'PUT'}});
     var products;
 
     return {
@@ -20,6 +20,13 @@ appFactoryModule.factory("productFactory", function ($resource) {
             var p = new productsResource({"id": pid});
             p.$remove(function () {
                 products.splice(index, 1);
+            });
+        },
+
+        updateProduct : function (updatedProduct) {
+            var p = new productsResource(updatedProduct);
+            p.$update(function (responseData) {
+                products[updatedProduct.index] = responseData;
             });
         }
     }

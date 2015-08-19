@@ -12,6 +12,10 @@ appServiceModule.service("appService", function (productFactory) {
     this.deleteProduct = function (id, index) {
       productFactory.deleteProduct(id, index);
     };
+
+    this.updateProduct = function (product) {
+      productFactory.updateProduct(product);
+    };
 });
 
 appServiceModule.service("cartService", function (cartFactory) {
